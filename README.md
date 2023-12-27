@@ -1,3 +1,9 @@
+[![PyPI version](https://badge.fury.io/py/py_code_cleaner.svg)](https://pypi.org/project/py_code_cleaner/)
+[![Downloads](https://pepy.tech/badge/py_code_cleaner)](https://pepy.tech/project/py_code_cleaner)
+[![Downloads](https://pepy.tech/badge/py_code_cleaner/month)](https://pepy.tech/project/py_code_cleaner)
+[![Downloads](https://pepy.tech/badge/py_code_cleaner/week)](https://pepy.tech/project/py_code_cleaner)
+
+
 # py-code-cleaner
 
 Small PyPI package which provides python code cleaning from comments, docstrings, annotations
