@@ -1,0 +1,9 @@
+-r requirements.txt
+
+pytest
+ipython
+
+setuptools
+wheel
+twine
+
