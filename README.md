@@ -1,7 +1,7 @@
-[![PyPI version](https://badge.fury.io/py/py_code_cleaner.svg)](https://pypi.org/project/py_code_cleaner/)
-[![Downloads](https://pepy.tech/badge/py_code_cleaner)](https://pepy.tech/project/py_code_cleaner)
-[![Downloads](https://pepy.tech/badge/py_code_cleaner/month)](https://pepy.tech/project/py_code_cleaner)
-[![Downloads](https://pepy.tech/badge/py_code_cleaner/week)](https://pepy.tech/project/py_code_cleaner)
+[![PyPI version](https://badge.fury.io/py/py-code-cleaner.svg)](https://pypi.org/project/py-code-cleaner/)
+[![Downloads](https://pepy.tech/badge/py-code-cleaner)](https://pepy.tech/project/py-code-cleaner)
+[![Downloads](https://pepy.tech/badge/py-code-cleaner/month)](https://pepy.tech/project/py-code-cleaner)
+[![Downloads](https://pepy.tech/badge/py-code-cleaner/week)](https://pepy.tech/project/py-code-cleaner)
 
 
 # py-code-cleaner
@@ -9,11 +9,11 @@
 Small PyPI package which provides python code cleaning from comments, docstrings, annotations
 
 ```
-pip install py_code_cleaner
+pip install py-code-cleaner
 ```
 
 ```py
-from py_code_cleaner import clean_py, clean_py_deep, clean_py_main
+from py-code-cleaner import clean_py, clean_py_deep, clean_py_main
 
 # def clean_py_main(
 #     src: PathLike,
