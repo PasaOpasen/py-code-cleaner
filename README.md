@@ -30,7 +30,7 @@ from py-code-cleaner import clean_py, clean_py_deep, clean_py_main
 ## CLI 
 
 ```sh
-cleane-py -h
+clean-py -h
 ```
 
 ```
