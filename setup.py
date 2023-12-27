@@ -32,7 +32,7 @@ setuptools.setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     install_requires=parse_requirements('./requirements.txt'),
-    entry_points = {
-        'console_scripts': ['py-code-cleaner=py_code_cleaner.py_code_cleaner:main'],
+    entry_points={
+        'console_scripts': ['clean-py=py_code_cleaner.py_code_cleaner:main'],
     },
 )
