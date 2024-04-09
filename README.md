@@ -6,7 +6,7 @@
 
 # py-code-cleaner
 
-Small PyPI package which provides python code cleaning from comments, docstrings, annotations
+Small PyPI package provides python code cleaning from comments, docstrings, annotations. Primary I use it for automated checks whether no code in the python files has been changed whatever new lines or comments added.
 
 ```
 pip install py-code-cleaner
