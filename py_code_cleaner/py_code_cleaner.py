@@ -101,7 +101,7 @@ def clean_py(
     assert p.exists(), p
     assert p.suffix == '.py', file_from
 
-    with open(file_from) as f:
+    with open(file_from, encoding='utf-8') as f:
         tree = ast.parse(f.read())
 
     if filter_annotations:
