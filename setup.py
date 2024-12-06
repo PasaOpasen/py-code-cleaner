@@ -33,6 +33,6 @@ setuptools.setup(
     ],
     install_requires=parse_requirements('./requirements.txt'),
     entry_points={
-        'console_scripts': ['clean-py=py_code_cleaner.py_code_cleaner:main'],
+        'console_scripts': ['clean-py=py_code_cleaner.cli_clean_py:main'],
     },
 )

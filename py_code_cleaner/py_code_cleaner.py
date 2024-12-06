@@ -1,14 +1,11 @@
 
-from typing import Optional, Set, Union, Any, Iterable, Sequence
+from typing import Optional, Set, Union, Any, Iterable
 from typing_extensions import TypeAlias
 
-import sys
 import os
 from pathlib import Path
 import shutil
 import tempfile
-
-import argparse
 
 import ast
 from ast import Constant
@@ -254,75 +251,49 @@ def clean_py_main(
         os.unlink(dst)
 
 
-#region CLI
+def clean_py_many(
+    src: Iterable[PathLike],
+    dst: PathLike,
+    keep_nonpy: Optional[Iterable[str]] = ('.pyx',),
+    filter_empty_lines: bool = True,
+    filter_docstrings: bool = True,
+    filter_annotations: bool = True,
+    quiet: bool = False,
+    dry_run: bool = False
+):
+    """
+    performs clean-py operation for many sources
+    Args:
+        src: sequence of files or folders
+        dst: destination folder to save results
+        keep_nonpy:
+        filter_empty_lines:
+        filter_docstrings:
+        filter_annotations:
+        quiet:
+        dry_run:
 
-parser = argparse.ArgumentParser(
-    prog='clean-py',
-    description='Cleanses *.py files from comments, empty lines, annotations and docstrings',
-    formatter_class=argparse.ArgumentDefaultsHelpFormatter
-)
-parser.add_argument('source', type=str, help='python file path or path to directory with files')
+    Notes:
+        absolute paths will be cut to their base names, it is recommended to use relative paths
+    """
 
-parser.add_argument(
-    '--destination', '-d', type=str, default=None,
-    help='destination file or directory; empty means to print to stdout'
-)
+    assert not isinstance(src, str), f'only string sequence! {src}'
 
-parser.add_argument(
-    '--keep-nonpy', '-k',
-    nargs="+",
-    type=str, default='',
-    help='additional file extensions to transfer between src and dst directories (to not ignore)'
-)
+    src = list(src)
+    assert src, 'no inputs'
 
-parser.add_argument(
-    '--keep-empty-lines', '-e',
-    action='store_true',
-    help='Whether to not remove empty lines'
-)
+    dst = Path(dst)
+    if dst.exists():
+        assert dst.is_dir(), f"target destination {dst} exists and is not a directory"
 
-parser.add_argument(
-    '--keep-docstrings', '-s',
-    action='store_true',
-    help='Whether to not remove docstrings'
-)
-
-parser.add_argument(
-    '--keep-annotations', '-a',
-    action='store_true',
-    help='Whether to not remove annotations'
-)
-
-parser.add_argument(
-    '--quiet', '-q',
-    action='store_true',
-    help='Do not print processing info'
-)
-
-parser.add_argument(
-    '--dry-run', '-n',
-    action='store_true',
-    help='Whether to run without performing file processing operations'
-)
-
-
-def main(args: Optional[Sequence[str]] = None):
-    kwargs = parser.parse_args(args or sys.argv[1:])
-
-    clean_py_main(
-        kwargs.source, kwargs.destination,
-        keep_nonpy=kwargs.keep_nonpy.split(),
-        filter_docstrings=not kwargs.keep_docstrings,
-        filter_annotations=not kwargs.keep_annotations,
-        filter_empty_lines=not kwargs.keep_empty_lines,
-        quiet=kwargs.quiet,
-        dry_run=kwargs.dry_run
-    )
-
-
-#endregion
-
-
-if __name__ == '__main__':
-    main()
+    for s in src:
+        s = Path(s)
+        clean_py_main(
+            src=s,
+            dst=dst / (
+                s.name if s.is_absolute() else '/'.join(p for p in s.parts if p != '..')
+            ),
+            keep_nonpy=keep_nonpy, filter_docstrings=filter_docstrings, filter_annotations=filter_annotations,
+            filter_empty_lines=filter_empty_lines, quiet=quiet, dry_run=dry_run
+        )
 
