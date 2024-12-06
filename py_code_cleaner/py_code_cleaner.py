@@ -99,7 +99,11 @@ def clean_py(
     assert p.suffix == '.py', file_from
 
     with open(file_from, encoding='utf-8') as f:
-        tree = ast.parse(f.read())
+        try:
+            tree = ast.parse(f.read())
+        except Exception:
+            print(f"Error on file {file_from}")
+            raise
 
     if filter_annotations:
         tree = TypeHintRemover().visit(tree)
