@@ -14,16 +14,16 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="py_code_cleaner", 
-    version='1.0.0',
+    version='1.1.0',
     author="Demetry Pascal",
     author_email="qtckpuhdsa@gmail.com",
     maintainer='Demetry Pascal',
     description="Small PyPI package which provides python code cleaning from comments, docstrings, annotations",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/PasaOpasen/toml-union",
+    url="https://github.com/PasaOpasen/py-code-cleaner",
     license='MIT',
-    keywords=['clean', 'comments', 'docstrings', 'annotations'],
+    keywords=['code', 'clean', 'comments', 'docstrings', 'annotations'],
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3.8",
@@ -33,6 +33,9 @@ setuptools.setup(
     ],
     install_requires=parse_requirements('./requirements.txt'),
     entry_points={
-        'console_scripts': ['clean-py=py_code_cleaner.cli.clean_py:main'],
+        'console_scripts': [
+            'clean-py=py_code_cleaner.cli.clean_py:main',
+            'clean-py-many=py_code_cleaner.cli.clean_py_many:main'
+        ],
     },
 )
