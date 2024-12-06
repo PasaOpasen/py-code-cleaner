@@ -1,4 +1,5 @@
 
+from pathlib import Path
 import setuptools
 
 
@@ -14,7 +15,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="py_code_cleaner", 
-    version='1.1.0',
+    version=Path('version.txt').read_text(encoding='utf-8'),
     author="Demetry Pascal",
     author_email="qtckpuhdsa@gmail.com",
     maintainer='Demetry Pascal',
