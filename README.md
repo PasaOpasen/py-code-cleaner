@@ -13,7 +13,7 @@ pip install py-code-cleaner
 ```
 
 ```py
-from py-code-cleaner import clean_py, clean_py_deep, clean_py_main
+from py_code_cleaner import clean_py, clean_py_deep, clean_py_main
 
 # def clean_py_main(
 #     src: PathLike,
