@@ -29,6 +29,8 @@ from py_code_cleaner import clean_py, clean_py_deep, clean_py_main
 
 ## CLI 
 
+### `clean-py`
+
 ```sh
 clean-py -h
 ```
@@ -55,4 +57,36 @@ optional arguments:
                         Whether to not remove annotations (default: False)
   --quiet, -q           Do not print processing info (default: False)
   --dry-run, -n         Whether to run without performing file processing operations (default: False)
+```
+
+### `clean-py-many`
+
+```sh
+clean-py-many --help
+```
+
+```
+usage: clean-py-many [-h] --destination DESTINATION [--keep-nonpy KEEP_NONPY [KEEP_NONPY ...]] [--keep-empty-lines] [--keep-docstrings] [--keep-annotations] [--quiet] [--dry-run] sources [sources ...]
+
+Cleans *.py files from comments, empty lines, annotations and docstrings
+
+positional arguments:
+  sources               paths to python files or files directories to be cleaned; all results will be saved in destination directory with same relative names as in input;absolute paths will be cut to base names,
+                        recommended to use relative paths
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --destination DESTINATION, -d DESTINATION
+                        destination directory (default: None)
+  --keep-nonpy KEEP_NONPY [KEEP_NONPY ...], -k KEEP_NONPY [KEEP_NONPY ...]
+                        additional file extensions to transfer between src and dst directories (to not ignore) (default: )
+  --keep-empty-lines, -e
+                        Whether to not remove empty lines (default: False)
+  --keep-docstrings, -s
+                        Whether to not remove docstrings (default: False)
+  --keep-annotations, -a
+                        Whether to not remove annotations (default: False)
+  --quiet, -q           Do not print processing info (default: False)
+  --dry-run, -n         Whether to run without performing file processing operations (default: False)
+
 ```
