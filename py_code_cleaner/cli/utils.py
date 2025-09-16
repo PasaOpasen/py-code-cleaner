@@ -32,7 +32,7 @@ def add_common_args(parser: argparse.ArgumentParser):
 
 
     parser.add_argument(
-        '--skip-errors', '-s',
+        '--skip-errors', '-i',
         action='store_true',
         help='Do not fail on problem files'
     )
