@@ -1,4 +1,6 @@
 
+from typing import Dict, Any
+
 import argparse
 
 
@@ -40,4 +42,14 @@ def add_common_args(parser: argparse.ArgumentParser):
         help='Whether to run without performing file processing operations'
     )
 
+
+def extract_common_kwargs(kwargs) -> Dict[str, Any]:
+    return dict(
+        keep_nonpy=kwargs.keep_nonpy.split(),
+        filter_docstrings=not kwargs.keep_docstrings,
+        filter_annotations=not kwargs.keep_annotations,
+        filter_empty_lines=not kwargs.keep_empty_lines,
+        quiet=kwargs.quiet,
+        dry_run=kwargs.dry_run
+    )
 

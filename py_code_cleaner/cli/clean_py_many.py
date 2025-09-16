@@ -5,7 +5,7 @@ import sys
 import argparse
 
 from ..py_code_cleaner import clean_py_many
-from .utils import add_common_args
+from .utils import add_common_args, extract_common_kwargs
 
 #region CLI
 
@@ -36,12 +36,7 @@ def main(args: Optional[Sequence[str]] = None):
 
     clean_py_many(
         kwargs.sources, kwargs.destination,
-        keep_nonpy=kwargs.keep_nonpy.split(),
-        filter_docstrings=not kwargs.keep_docstrings,
-        filter_annotations=not kwargs.keep_annotations,
-        filter_empty_lines=not kwargs.keep_empty_lines,
-        quiet=kwargs.quiet,
-        dry_run=kwargs.dry_run
+        **extract_common_kwargs(kwargs)
     )
 
 
