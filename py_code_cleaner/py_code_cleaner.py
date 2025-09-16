@@ -82,7 +82,7 @@ def clean_py(
     filter_annotations: bool = True
 ) -> None:
     """
-    remove comments and other data from python files
+    removes comments and other data from python files
 
     Args:
         file_from:
@@ -190,7 +190,7 @@ def clean_py_main(
     dry_run: bool = False
 ):
     """
-    perform cleaning process from src to dst
+    performs cleaning process from src to dst
     Args:
         src: python file path or path to directory with files
         dst: destination file or directory; empty means to print to stdout
@@ -212,7 +212,7 @@ def clean_py_main(
     if src.is_file():
         assert src.suffix == '.py', src
 
-    filter_kwargs = dict(
+    common_kwargs = dict(
         filter_empty_lines=filter_empty_lines,
         filter_docstrings=filter_docstrings,
         filter_annotations=filter_annotations
@@ -228,7 +228,7 @@ def clean_py_main(
             if verbose:
                 print(f"Clean {str(src)} -> {str(dst)}")
             if not dry_run:
-                clean_py(src, dst, **filter_kwargs)
+                clean_py(src, dst, **common_kwargs)
         else:
             if dst.exists():
                 assert dst.is_dir(), f"src {str(src)} if dir, but dst {str(dst)} is not"
@@ -240,7 +240,7 @@ def clean_py_main(
                 keep_nonpy=keep_nonpy,
                 verbose=verbose,
                 dry_run=dry_run,
-                **filter_kwargs
+                **common_kwargs
             )
 
     else:  # no destination
@@ -250,7 +250,7 @@ def clean_py_main(
 
         import time
         dst = os.path.join(tempfile.gettempdir(), f'clean-py-no-dst{time.time()}')
-        clean_py(src, dst, **filter_kwargs)
+        clean_py(src, dst, **common_kwargs)
         print(read_text(dst))
         os.unlink(dst)
 
