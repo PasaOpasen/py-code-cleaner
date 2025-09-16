@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 import shutil
 import tempfile
+import traceback
 
 import ast
 from ast import Constant
@@ -79,7 +80,8 @@ def clean_py(
     file_to: PathLike,
     filter_empty_lines: bool = True,
     filter_docstrings: bool = True,
-    filter_annotations: bool = True
+    filter_annotations: bool = True,
+    skip_errors: bool = False,
 ) -> None:
     """
     removes comments and other data from python files
@@ -90,6 +92,7 @@ def clean_py(
         filter_empty_lines: remove empty lines too
         filter_docstrings: remove docstrings too
         filter_annotations: remove annotations too
+        skip_errors: whether to not raise on some problem code
 
     """
 
@@ -103,6 +106,10 @@ def clean_py(
             tree = ast.parse(f.read())
         except Exception:
             print(f"Error on file {file_from}")
+            if skip_errors:
+                write_text(file_to, f"'''\n{traceback.format_exc()}\n'''\n\n{read_text(file_from)}")
+                return
+
             raise
 
     if filter_annotations:
@@ -186,6 +193,7 @@ def clean_py_main(
     filter_empty_lines: bool = True,
     filter_docstrings: bool = True,
     filter_annotations: bool = True,
+    skip_errors: bool = False,
     quiet: bool = False,
     dry_run: bool = False
 ):
@@ -215,7 +223,8 @@ def clean_py_main(
     common_kwargs = dict(
         filter_empty_lines=filter_empty_lines,
         filter_docstrings=filter_docstrings,
-        filter_annotations=filter_annotations
+        filter_annotations=filter_annotations,
+        skip_errors=skip_errors,
     )
 
     if dst:  # destination provided
@@ -262,6 +271,7 @@ def clean_py_many(
     filter_empty_lines: bool = True,
     filter_docstrings: bool = True,
     filter_annotations: bool = True,
+    skip_errors: bool = False,
     quiet: bool = False,
     dry_run: bool = False
 ):
@@ -297,7 +307,10 @@ def clean_py_many(
             dst=dst / (
                 s.name if s.is_absolute() else '/'.join(p for p in s.parts if p != '..')
             ),
-            keep_nonpy=keep_nonpy, filter_docstrings=filter_docstrings, filter_annotations=filter_annotations,
-            filter_empty_lines=filter_empty_lines, quiet=quiet, dry_run=dry_run
+            keep_nonpy=keep_nonpy, 
+            filter_docstrings=filter_docstrings, filter_annotations=filter_annotations,
+            filter_empty_lines=filter_empty_lines,
+            skip_errors=skip_errors,
+            quiet=quiet, dry_run=dry_run,
         )
 

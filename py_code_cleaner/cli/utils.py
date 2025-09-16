@@ -30,6 +30,13 @@ def add_common_args(parser: argparse.ArgumentParser):
         help='Whether to not remove annotations'
     )
 
+
+    parser.add_argument(
+        '--skip-errors', '-s',
+        action='store_true',
+        help='Do not fail on problem files'
+    )
+
     parser.add_argument(
         '--quiet', '-q',
         action='store_true',
@@ -49,6 +56,7 @@ def extract_common_kwargs(kwargs) -> Dict[str, Any]:
         filter_docstrings=not kwargs.keep_docstrings,
         filter_annotations=not kwargs.keep_annotations,
         filter_empty_lines=not kwargs.keep_empty_lines,
+        skip_errors=kwargs.skip_errors,
         quiet=kwargs.quiet,
         dry_run=kwargs.dry_run
     )
