@@ -3,6 +3,7 @@ from typing import Optional, Set, Union, Any, Iterable
 from typing_extensions import TypeAlias
 
 import os
+import sys
 from pathlib import Path
 import shutil
 import tempfile
@@ -105,7 +106,7 @@ def clean_py(
         try:
             tree = ast.parse(f.read())
         except Exception:
-            print(f"Error on file {file_from}")
+            print(f"Error on file {file_from}", file=sys.stderr)
             if skip_errors:
                 write_text(file_to, f"'''\n{traceback.format_exc()}\n'''\n\n{read_text(file_from)}")
                 return
